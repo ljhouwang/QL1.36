@@ -819,6 +819,8 @@ BOOST_AUTO_TEST_CASE(testInterpolatedZeroTermStructure) {
 BOOST_AUTO_TEST_CASE(testQuotedYYIndex) {
     BOOST_TEST_MESSAGE("Testing quoted year-on-year inflation indices...");
 
+    QL_DEPRECATED_DISABLE_WARNING
+
     YYEUHICP yyeuhicp(true);
     if (yyeuhicp.name() != "EU YY_HICP"
         || yyeuhicp.frequency() != Monthly
@@ -835,7 +837,9 @@ BOOST_AUTO_TEST_CASE(testQuotedYYIndex) {
                     << yyeuhicp.availabilityLag() << ")");
     }
 
-    YYUKRPI yyukrpi(false);
+    QL_DEPRECATED_ENABLE_WARNING
+
+    YYUKRPI yyukrpi;
     if (yyukrpi.name() != "UK YY_RPI"
         || yyukrpi.frequency() != Monthly
         || yyukrpi.revised()
@@ -857,8 +861,11 @@ BOOST_AUTO_TEST_CASE(testQuotedYYIndexFutureFixing) {
 
     // we create indexes without a term structure, so
     // they won't be able to forecast fixings
-    YYEUHICP quoted_flat(false);
+    YYEUHICP quoted_flat;
+
+    QL_DEPRECATED_DISABLE_WARNING
     YYEUHICP quoted_linear(true);
+    QL_DEPRECATED_ENABLE_WARNING
 
     // let's say we're at some point in April 2024...
     Settings::instance().evaluationDate() = {10, April, 2024};
@@ -900,7 +907,9 @@ BOOST_AUTO_TEST_CASE(testRatioYYIndex) {
     auto euhicp = ext::make_shared<EUHICP>();
     auto ukrpi = ext::make_shared<UKRPI>();
 
+    QL_DEPRECATED_DISABLE_WARNING
     YoYInflationIndex yyeuhicpr(euhicp, true);
+    QL_DEPRECATED_ENABLE_WARNING
     if (yyeuhicpr.name() != "EU YYR_HICP"
         || yyeuhicpr.frequency() != Monthly
         || yyeuhicpr.revised()
@@ -916,7 +925,7 @@ BOOST_AUTO_TEST_CASE(testRatioYYIndex) {
                     << yyeuhicpr.availabilityLag() << ")");
     }
 
-    YoYInflationIndex yyukrpir(ukrpi, false);
+    YoYInflationIndex yyukrpir(ukrpi);
     if (yyukrpir.name() != "UK YYR_RPI"
         || yyukrpir.frequency() != Monthly
         || yyukrpir.revised()
@@ -959,8 +968,10 @@ BOOST_AUTO_TEST_CASE(testRatioYYIndex) {
         ukrpi->addFixing(rpiSchedule[i], fixData[i]);
     }
 
-    auto iir = ext::make_shared<YoYInflationIndex>(ukrpi, false);
+    auto iir = ext::make_shared<YoYInflationIndex>(ukrpi);
+    QL_DEPRECATED_DISABLE_WARNING
     auto iirYES = ext::make_shared<YoYInflationIndex>(ukrpi, true);
+    QL_DEPRECATED_ENABLE_WARNING
 
     Date todayMinusLag = evaluationDate - iir->availabilityLag();
     std::pair<Date,Date> lim = inflationPeriod(todayMinusLag, iir->frequency());
@@ -1018,8 +1029,10 @@ BOOST_AUTO_TEST_CASE(testRatioYYIndexFutureFixing) {
     // we create indexes without a term structure, so
     // they won't be able to forecast fixings
     auto euhicp = ext::make_shared<EUHICP>();
-    YoYInflationIndex ratio_flat(euhicp, false);
+    YoYInflationIndex ratio_flat(euhicp);
+    QL_DEPRECATED_DISABLE_WARNING
     YoYInflationIndex ratio_linear(euhicp, true);
+    QL_DEPRECATED_ENABLE_WARNING
 
     // let's say we're at some point in April 2024...
     Settings::instance().evaluationDate() = {10, April, 2024};
