@@ -1100,9 +1100,8 @@ BOOST_AUTO_TEST_CASE(testYYTermStructure) {
     };
 
     RelinkableHandle<YoYInflationTermStructure> hy;
-    bool interp = false;
     auto rpi = ext::make_shared<UKRPI>();
-    auto iir = ext::make_shared<YoYInflationIndex>(rpi, interp, hy);
+    auto iir = ext::make_shared<YoYInflationIndex>(rpi, hy);
     for (Size i=0; i<LENGTH(fixData); i++) {
         rpi->addFixing(rpiSchedule[i], fixData[i]);
     }
@@ -1257,9 +1256,8 @@ BOOST_AUTO_TEST_CASE(testYYTermStructureWithLag) {
         207.3 };
 
     RelinkableHandle<YoYInflationTermStructure> hy;
-    bool interp = false;
     auto rpi = ext::make_shared<UKRPI>();
-    auto iir = ext::make_shared<YoYInflationIndex>(rpi, interp, hy);
+    auto iir = ext::make_shared<YoYInflationIndex>(rpi, hy);
     for (Size i=0; i<LENGTH(fixData); i++) {
         rpi->addFixing(rpiSchedule[i], fixData[i]);
     }
@@ -1568,8 +1566,10 @@ BOOST_AUTO_TEST_CASE(testCpiYoYQuotedFlatInterpolation) {
 
     Settings::instance().evaluationDate() = Date(10, February, 2022);
 
-    auto testIndex1 = ext::make_shared<YYUKRPI>(false);
+    auto testIndex1 = ext::make_shared<YYUKRPI>();
+    QL_DEPRECATED_DISABLE_WARNING
     auto testIndex2 = ext::make_shared<YYUKRPI>(true);
+    QL_DEPRECATED_ENABLE_WARNING
 
     testIndex1->addFixing(Date(1, November, 2020), 0.02935);
     testIndex1->addFixing(Date(1, December, 2020), 0.02954);
