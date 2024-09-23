@@ -1131,8 +1131,7 @@ BOOST_AUTO_TEST_CASE(testYYTermStructure) {
     auto pYYTS =
         ext::make_shared<PiecewiseYoYInflationCurve<Linear>>(
                 evaluationDate, baseDate, baseYYRate,
-                iir->frequency(),iir->interpolated(), dc,
-                helpers);
+                iir->frequency(), dc, helpers);
 
     // validation
     // yoy swaps should reprice to zero

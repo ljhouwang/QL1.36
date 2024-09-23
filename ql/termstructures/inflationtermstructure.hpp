@@ -254,10 +254,39 @@ namespace QuantLib {
         YoYInflationTermStructure(Date baseDate,
                                   Rate baseYoYRate,
                                   Frequency frequency,
+                                  const DayCounter& dayCounter,
+                                  const ext::shared_ptr<Seasonality>& seasonality = {});
+
+        YoYInflationTermStructure(const Date& referenceDate,
+                                  Date baseDate,
+                                  Rate baseYoYRate,
+                                  Frequency frequency,
+                                  const DayCounter& dayCounter,
+                                  const ext::shared_ptr<Seasonality>& seasonality = {});
+
+        YoYInflationTermStructure(Natural settlementDays,
+                                  const Calendar& calendar,
+                                  Date baseDate,
+                                  Rate baseYoYRate,
+                                  Frequency frequency,
+                                  const DayCounter& dayCounter,
+                                  const ext::shared_ptr<Seasonality>& seasonality = {});
+
+        /*! \deprecated Use an overload with an explicit base date and without indexIsInterpolated.
+                        Deprecated in version 1.36.
+        */
+        [[deprecated("Use an overload with an explicit base date and without indexIsInterpolated")]]
+        YoYInflationTermStructure(Date baseDate,
+                                  Rate baseYoYRate,
+                                  Frequency frequency,
                                   bool indexIsInterpolated,
                                   const DayCounter& dayCounter,
                                   const ext::shared_ptr<Seasonality>& seasonality = {});
 
+        /*! \deprecated Use an overload with an explicit base date and without indexIsInterpolated.
+                        Deprecated in version 1.36.
+        */
+        [[deprecated("Use an overload with an explicit base date and without indexIsInterpolated")]]
         YoYInflationTermStructure(const Date& referenceDate,
                                   Date baseDate,
                                   Rate baseYoYRate,
@@ -266,6 +295,10 @@ namespace QuantLib {
                                   const DayCounter& dayCounter,
                                   const ext::shared_ptr<Seasonality>& seasonality = {});
 
+        /*! \deprecated Use an overload with an explicit base date and without indexIsInterpolated.
+                        Deprecated in version 1.36.
+        */
+        [[deprecated("Use an overload with an explicit base date and without indexIsInterpolated")]]
         YoYInflationTermStructure(Natural settlementDays,
                                   const Calendar& calendar,
                                   Date baseDate,
@@ -275,11 +308,10 @@ namespace QuantLib {
                                   const DayCounter& dayCounter,
                                   const ext::shared_ptr<Seasonality>& seasonality = {});
 
-        /*! \deprecated Use another overload and pass the base date directly
-                        instead of using a lag.
+        /*! \deprecated Use an overload with an explicit base date and without indexIsInterpolated.
                         Deprecated in version 1.34.
         */
-        QL_DEPRECATED
+        [[deprecated("Use an overload with an explicit base date and without indexIsInterpolated")]]
         YoYInflationTermStructure(const DayCounter& dayCounter,
                                   Rate baseYoYRate,
                                   const Period& lag,
@@ -287,11 +319,10 @@ namespace QuantLib {
                                   bool indexIsInterpolated,
                                   const ext::shared_ptr<Seasonality>& seasonality = {});
 
-        /*! \deprecated Use another overload and pass the base date directly
-                        instead of using a lag.
+        /*! \deprecated Use an overload with an explicit base date and without indexIsInterpolated.
                         Deprecated in version 1.34.
         */
-        QL_DEPRECATED
+        [[deprecated("Use an overload with an explicit base date and without indexIsInterpolated")]]
         YoYInflationTermStructure(const Date& referenceDate,
                                   const Calendar& calendar,
                                   const DayCounter& dayCounter,
@@ -301,11 +332,10 @@ namespace QuantLib {
                                   bool indexIsInterpolated,
                                   const ext::shared_ptr<Seasonality>& seasonality = {});
 
-        /*! \deprecated Use another overload and pass the base date directly
-                        instead of using a lag.
+        /*! \deprecated Use an overload with an explicit base date and without indexIsInterpolated.
                         Deprecated in version 1.34.
         */
-        QL_DEPRECATED
+        [[deprecated("Use an overload with an explicit base date and without indexIsInterpolated")]]
         YoYInflationTermStructure(Natural settlementDays,
                                   const Calendar& calendar,
                                   const DayCounter& dayCounter,

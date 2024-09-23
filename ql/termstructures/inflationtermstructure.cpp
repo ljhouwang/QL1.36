@@ -262,6 +262,36 @@ namespace QuantLib {
         return zeroRateImpl(t);
     }
 
+    QL_DEPRECATED_DISABLE_WARNING
+
+    YoYInflationTermStructure::YoYInflationTermStructure(
+                                    Date baseDate,
+                                    Rate baseYoYRate,
+                                    Frequency frequency,
+                                    const DayCounter& dayCounter,
+                                    const ext::shared_ptr<Seasonality> &seasonality)
+    : YoYInflationTermStructure(baseDate, baseYoYRate, frequency, false, dayCounter, seasonality) {}
+
+    YoYInflationTermStructure::YoYInflationTermStructure(
+                                    const Date& referenceDate,
+                                    Date baseDate,
+                                    Rate baseYoYRate,
+                                    Frequency frequency,
+                                    const DayCounter& dayCounter,
+                                    const ext::shared_ptr<Seasonality> &seasonality)
+    : YoYInflationTermStructure(referenceDate, baseDate, baseYoYRate, frequency, false, dayCounter, seasonality) {}
+
+    YoYInflationTermStructure::YoYInflationTermStructure(
+                                    Natural settlementDays,
+                                    const Calendar& calendar,
+                                    Date baseDate,
+                                    Rate baseYoYRate,
+                                    Frequency frequency,
+                                    const DayCounter& dayCounter,
+                                    const ext::shared_ptr<Seasonality> &seasonality)
+    : YoYInflationTermStructure(settlementDays, calendar, baseDate, baseYoYRate, frequency, false, dayCounter, seasonality) {}
+
+    QL_DEPRECATED_ENABLE_WARNING
 
     YoYInflationTermStructure::YoYInflationTermStructure(
                                     Date baseDate,

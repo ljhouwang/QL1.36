@@ -47,8 +47,31 @@ namespace QuantLib {
       public:
         typedef Traits traits_type;
         typedef Interpolator interpolator_type;
+
         //! \name Constructors
         //@{
+
+        QL_DEPRECATED_DISABLE_WARNING
+
+        PiecewiseYoYInflationCurve(
+            const Date& referenceDate,
+            Date baseDate,
+            Rate baseYoYRate,
+            Frequency frequency,
+            const DayCounter& dayCounter,
+            std::vector<ext::shared_ptr<typename Traits::helper> > instruments,
+            const ext::shared_ptr<Seasonality>& seasonality = {},
+            Real accuracy = 1.0e-12,
+            const Interpolator& i = Interpolator())
+        : PiecewiseYoYInflationCurve(referenceDate, baseDate, baseYoYRate, frequency, false,
+                                     dayCounter, instruments, seasonality, accuracy, i) {}
+
+        QL_DEPRECATED_ENABLE_WARNING
+
+        /*! \deprecated Use the overload without indexIsInterpolated.
+                        Deprecated in version 1.36.
+        */
+        [[deprecated("Use the overload without indexIsInterpolated")]]
         PiecewiseYoYInflationCurve(
             const Date& referenceDate,
             Date baseDate,
@@ -75,11 +98,11 @@ namespace QuantLib {
 
         QL_DEPRECATED_DISABLE_WARNING
 
-        /*! \deprecated Use the other overload and pass the base date directly
-                        instead of using a lag.
+        /*! \deprecated Use the overload without lag and indexIsInterpolated and
+                        pass the base date as the first date in the vector.
                         Deprecated in version 1.34.
         */
-        QL_DEPRECATED
+        [[deprecated("Use the overload without lag and indexIsInterpolated and pass the base date as the first date in the vector")]]
         PiecewiseYoYInflationCurve(
             const Date& referenceDate,
             const Calendar& calendar,
